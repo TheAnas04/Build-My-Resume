@@ -1,8 +1,7 @@
 function showResume(){
     let mainDiv = document.getElementById('main');
-    mainDiv.remove();
+    mainDiv.setAttribute('style','display: none');
     let resumeDiv = document.createElement('div');
-    resumeDiv.id = "resume";
     resumeDiv.setAttribute('style','width: 80%; height: 90vh; margin: auto')
     let body = document.getElementById('body');
     body.appendChild(resumeDiv);
@@ -14,8 +13,7 @@ function resume1(resumeDiv){
     resumeDiv.setAttribute('style','background-color: white; padding: 2%; width: 65%; margin: auto;border: 1px solid gray')
     let header = document.createElement('div');
     let name = document.createElement('h1');
-    name.innerText = "Anas Shaikh";
-    // name.setAttribute('style','background-color: gray; border-radius: 10px; padding-left: 1%');
+    name.innerText = document.getElementById('name').value ;
     header.appendChild(name);
 
     let add = document.createElement('div');
@@ -24,7 +22,8 @@ function resume1(resumeDiv){
     address.innerText = "Indore |";
     add.appendChild(address);
     let mail = document.createElement('p');
-    mail.innerText = "demo@gmail.com";
+    // mail.innerText = "demo@gmail.com";
+    mail.innerText = document.getElementById('mail').value ;
     mail.setAttribute('style','margin-left: 1%')
     add.appendChild(mail);
     header.appendChild(add);
@@ -37,7 +36,7 @@ function resume1(resumeDiv){
     summary.appendChild(sumHeading);
 
     let sumDesc = document.createElement('p');
-    sumDesc.innerText = "Hello this is Anas Shaikh i am seeking a position where i can learn new skills and update the level of my own and be in the class of my own. And also looking to work with a company who aim is to develop."
+    sumDesc.innerText = document.getElementById('summary');
     summary.appendChild(sumDesc);
     resumeDiv.appendChild(summary);
 

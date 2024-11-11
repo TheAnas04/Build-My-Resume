@@ -1,11 +1,25 @@
-function showResume(){
+function showResume(num){
     let mainDiv = document.getElementById('main');
     mainDiv.setAttribute('style','display: none');
     let resumeDiv = document.createElement('div');
     resumeDiv.setAttribute('style','width: 80%; height: 90vh; margin: auto')
     let body = document.getElementById('body');
     body.appendChild(resumeDiv);
-    resume1(resumeDiv);
+
+    switch(num){
+        case 1: resume1(resumeDiv);
+            break;
+        case 2: resume2(resumeDiv);
+            break;
+        case 3: resume3(resumeDiv);
+            break;
+        case 4: resume4(resumeDiv);
+            break;
+        case 5: resume5(resumeDiv);
+            break;
+        case 6: resume6(resumeDiv);
+    }
+    // resume1(resumeDiv);
 
 }
 
@@ -19,7 +33,7 @@ function resume1(resumeDiv){
     let add = document.createElement('div');
     add.setAttribute('style','display: flex;')
     let address = document.createElement('p');
-    address.innerText = "Indore |";
+    address.innerText = `${document.getElementById('location').value} | `;
     add.appendChild(address);
     let mail = document.createElement('p');
     // mail.innerText = "demo@gmail.com";
@@ -36,7 +50,7 @@ function resume1(resumeDiv){
     summary.appendChild(sumHeading);
 
     let sumDesc = document.createElement('p');
-    sumDesc.innerText = document.getElementById('summary');
+    sumDesc.innerText = document.getElementById('summary').value;
     summary.appendChild(sumDesc);
     resumeDiv.appendChild(summary);
 
@@ -48,14 +62,25 @@ function resume1(resumeDiv){
 
     let skillList = document.createElement('ul');
     skillList.setAttribute('style','text-decoration: none');
-    let li1 = document.createElement('li');
-    li1.innerText = "Skill one";
-    skillList.appendChild(li1);
-    skill.appendChild(skillList);
+    // let li1 = document.createElement('li');
+    // li1.innerText = "Skill one";
+    // skillList.appendChild(li1);
+    // skill.appendChild(skillList);
 
-    let li3 = document.createElement('li');
-    li3.innerText = "Skill two";
-    skillList.appendChild(li3);
+    // let li3 = document.createElement('li');
+    // li3.innerText = "Skill two";
+    // skillList.appendChild(li3);
+
+    let skills = document.getElementById('skills');
+    
+    for( let i=0 ; i<skills.children.length ; i++ ){
+        if(skills.children[i].checked){
+            let li1 = document.createElement('li');
+            li1.innerText = skills.children[i].value;
+            skillList.appendChild(li1);
+        }
+    }
+    skill.appendChild(skillList);
     resumeDiv.appendChild(skill);
 
     let exp = document.createElement('div');
@@ -64,13 +89,23 @@ function resume1(resumeDiv){
     expHead.setAttribute('style','background-color: gray; border-radius: 30px; padding: 0.7%');
     exp.appendChild(expHead);
 
+    let userExperience = document.getElementById('options').value;
     let list = document.createElement('ul');
-    let li = document.createElement('li');
-    li.innerText = "I worked as an intern in xyz company";
-    list.appendChild(li);
-    let li2 = document.createElement('li');
-    li2.innerText = "I worked as a junior software developer in xyz2 company";
-    list.appendChild(li2);
+    
+    if( userExperience=="Fresher" ){
+        let li = document.createElement('li');
+        li.innerText = "Fresher";
+        list.appendChild(li);
+    }
+    else {
+        let data = document.getElementsByClassName('pastExperience');
+        for( let e of data ){
+            let li = document.createElement('li');
+            li.innerText = e.value;
+            list.appendChild(li);
+            
+        }
+    }
     exp.appendChild(list);
     resumeDiv.appendChild(exp);
 
@@ -82,12 +117,11 @@ function resume1(resumeDiv){
     
     let edDesc = document.createElement('ul');
     let one = document.createElement('li');
-    one.innerText = "I have done B.tech in CSE ";
+    one.innerText = `I have done ${document.getElementById('bchlr').value}.`;
     edDesc.appendChild(one);
     let two = document.createElement('li');
-    two.innerText = "I have done M.tech in CSE ";
+    two.innerText = `I have done ${document.getElementById('master').value}.`;
     edDesc.appendChild(two);
     education.appendChild(edDesc);
     resumeDiv.appendChild(education);
-
 }

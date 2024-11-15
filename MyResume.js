@@ -1,8 +1,22 @@
-function showResume(num){
+function showResume(num, x){
+    if( x ){
+        x.parentElement.remove();
+    }
     let mainDiv = document.getElementById('main');
     mainDiv.setAttribute('style','display: none');
+
+    let toRemove = document.getElementById('resumeDiv');
+    if( toRemove ){
+        toRemove.remove();
+        let temp = document.getElementById('templateArea');
+        if( temp ){
+            temp.setAttribute('style','display: none');
+        }
+    }
+
     let resumeDiv = document.createElement('div');
-    resumeDiv.setAttribute('style','width: 80%; height: 90vh; margin: auto')
+    resumeDiv.setAttribute('style','width: 80%; height: 90vh; margin: auto');
+    resumeDiv.id = "resumeDiv";
     let body = document.getElementById('body');
     body.appendChild(resumeDiv);
 
@@ -19,7 +33,7 @@ function showResume(num){
             break;
         case 6: resume6(resumeDiv);
     }
-    // resume1(resumeDiv);
+    showTemplates(body);
 
 }
 
@@ -36,7 +50,6 @@ function resume1(resumeDiv){
     address.innerText = `${document.getElementById('location').value} | `;
     add.appendChild(address);
     let mail = document.createElement('p');
-    // mail.innerText = "demo@gmail.com";
     mail.innerText = document.getElementById('mail').value ;
     mail.setAttribute('style','margin-left: 1%')
     add.appendChild(mail);
@@ -62,19 +75,11 @@ function resume1(resumeDiv){
 
     let skillList = document.createElement('ul');
     skillList.setAttribute('style','text-decoration: none');
-    // let li1 = document.createElement('li');
-    // li1.innerText = "Skill one";
-    // skillList.appendChild(li1);
-    // skill.appendChild(skillList);
-
-    // let li3 = document.createElement('li');
-    // li3.innerText = "Skill two";
-    // skillList.appendChild(li3);
 
     let skills = document.getElementById('skills');
     
     addSkills(skills, skillList);
-
+    
     skill.appendChild(skillList);
     resumeDiv.appendChild(skill);
 
@@ -109,32 +114,6 @@ function resume1(resumeDiv){
     resumeDiv.appendChild(education);
 }
 
-function addSkills(skills, skillList){
-    for( let i=0 ; i<skills.children.length ; i++ ){
-        if(skills.children[i].checked){
-            let li1 = document.createElement('li');
-            li1.innerText = skills.children[i].value;
-            skillList.appendChild(li1);
-        }
-    }
-}
-
-function expFunction(userExperience, list){
-    if( userExperience=="Fresher" ){
-        let li = document.createElement('li');
-        li.innerText = "Fresher";
-        list.appendChild(li);
-    }
-    else {
-        let data = document.getElementsByClassName('pastExperience');
-        for( let e of data ){
-            let li = document.createElement('li');
-            li.innerText = e.value;
-            list.appendChild(li);
-            
-        }
-    }
-}
 
 function resume2(resumeDiv){
     resumeDiv.setAttribute('style','background-color: white; padding: 2%; width: 65%; margin: auto;border: 1px solid gray');
@@ -145,20 +124,20 @@ function resume2(resumeDiv){
     let name = document.createElement('h1');
     name.innerText = document.getElementById('name').value;
     header.appendChild(name);
-
+    
     let add = document.createElement('p');
     add.innerText = document.getElementById('location').value;
     header.appendChild(add);
-
+    
     let no = document.createElement('p');
     no.innerText = document.getElementById('phoneNumber').value;
     header.appendChild(no);
-
+    
     let mail = document.createElement('p');
     mail.innerText = document.getElementById('mail').value;
     header.appendChild(mail);
     resumeDiv.appendChild(header);
-
+    
     let workExpDiv = document.createElement('div');
     let workHead = document.createElement('h3');
     workHead.innerText = "Work Experience";
@@ -216,10 +195,38 @@ function resume2(resumeDiv){
     let line3 = document.createElement('hr');
     skillHead.appendChild(line3);
     skillDiv.appendChild(skillHead);
-
+    
     let skillList = document.createElement('ul');
     let skills = document.getElementById('skills');
     addSkills(skills, skillList);
     skillDiv.appendChild(skillList);
     resumeDiv.appendChild(skillDiv);
+}
+
+
+function addSkills(skills, skillList){
+    for( let i=0 ; i<skills.children.length ; i++ ){
+        if(skills.children[i].checked){
+            let li1 = document.createElement('li');
+            li1.innerText = skills.children[i].value;
+            skillList.appendChild(li1);
+        }
+    }
+}
+
+function expFunction(userExperience, list){
+    if( userExperience=="Fresher" ){
+        let li = document.createElement('li');
+        li.innerText = "Fresher";
+        list.appendChild(li);
+    }
+    else {
+        let data = document.getElementsByClassName('pastExperience');
+        for( let e of data ){
+            let li = document.createElement('li');
+            li.innerText = e.value;
+            list.appendChild(li);
+            
+        }
+    }
 }
